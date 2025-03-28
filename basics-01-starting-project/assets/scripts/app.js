@@ -21,42 +21,88 @@ function writeTolog(operationId, prevResult, operationNum, newResult) {
   logEntries.push(logEntry);
   console.log(logEntries);
 }
-function add() {
-  const enteredNum = parseInt(userInput.value);
+
+function calculateResult(calculationType) {
+  const enteredNum = getUserNumberInput();
+  if (
+    (calculationType !== "ADD" &&
+      calculationType != "SUBSTRACT" &&
+      calculationType != "MULTIPLY" &&
+      calculationType != "DIVIDE") ||
+    !enteredNum /* enteredNum === 0  */
+  ) {
+    return;
+  } /*all have to be true*/
+
+  /* if (
+    calculationType === "ADD" ||
+    calculationType === "SUBSTRACT" ||
+    calculationType === "MULTIPLY" ||
+    calculationType === "DIVIDE"
+  ) {
+    return;
+  } */
+
   const initialResult = currentResult;
-  currentResult += enteredNum;
-  /* also with + +userInput.value */ /* .tostring() */
-  createAndWriteOutput("+", initialResult, enteredNum);
+  let mathOperator;
+  if (calculationType === "ADD") {
+    currentResult += enteredNum;
+    mathOperator = "+";
+  } else if (calculationType === "SUBSTRACT") {
+    currentResult -= enteredNum;
+    mathOperator = "-";
+  } else if (calculationType === "MULTIPLY") {
+    currentResult *= enteredNum;
+    mathOperator = "*";
+  } else if (calculationType === "DIVIDE") {
+    currentResult /= enteredNum;
+    mathOperator = "/";
+  }
+
+  createAndWriteOutput(mathOperator, initialResult, enteredNum);
+  writeTolog(calculationType, initialResult, enteredNum, currentResult);
+}
+function add() {
+  calculateResult("ADD");
+  /*   const enteredNum = parseInt(userInput.value);
+  const initialResult = currentResult;
+  currentResult += enteredNum; */
+  /* also with + +userInput.value */
+  /* .tostring() */
+  /* createAndWriteOutput("+", initialResult, enteredNum); */
   /* alert("The result is: \n" + result); */
   /*  logEntries.push(logEntry);  push new element add new element aray 
   console.log(logEntry.operation);  will return only the operation 
   console.log(logEntries);*/
-  writeTolog("ADD", initialResult, enteredNum, currentResult);
+  /* writeTolog("ADD", initialResult, enteredNum, currentResult); */
 }
 
 function subtract() {
-  const enteredNum = parseInt(userInput.value);
+  calculateResult("SUBSTRACT");
+  /* const enteredNum = parseInt(userInput.value);
   const initialResult = currentResult;
-  currentResult -= enteredNum;
+  currentResult -= enteredNum; */
   //currentResult++ adds one --, ** if we put it before the variable we will get the updated value if not the before value
-  createAndWriteOutput("-", initialResult, enteredNum);
-  writeTolog("SUBSTRACT", initialResult, enteredNum, currentResult);
+  /* createAndWriteOutput("-", initialResult, enteredNum);
+  writeTolog("SUBSTRACT", initialResult, enteredNum, currentResult); */
 }
 
 function multiply() {
-  const enteredNum = parseInt(userInput.value);
+  calculateResult("MULTIPLY");
+  /* const enteredNum = parseInt(userInput.value);
   const initialResult = currentResult;
   currentResult *= enteredNum;
   createAndWriteOutput("*", initialResult, enteredNum);
-  writeTolog("MULTIPLY", initialResult, enteredNum, currentResult);
+  writeTolog("MULTIPLY", initialResult, enteredNum, currentResult); */
 }
 
 function divide() {
-  const enteredNum = parseInt(userInput.value);
+  calculateResult("DIVIDE");
+  /*  const enteredNum = parseInt(userInput.value);
   const initialResult = currentResult;
   currentResult /= enteredNum;
   createAndWriteOutput("/", initialResult, enteredNum);
-  writeTolog("DIVIDE", initialResult, enteredNum, currentResult);
+  writeTolog("DIVIDE", initialResult, enteredNum, currentResult); */
 }
 addBtn.addEventListener("click", add);
 subtractBtn.addEventListener("click", subtract);
