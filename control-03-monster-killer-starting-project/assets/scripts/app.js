@@ -11,13 +11,30 @@ const LOG_EVENT_MONSTER_ATTACK = "MONSTER_ATTACK";
 const LOG_EVENT_PLAYER_HEAL = "PLAYER_HEAL";
 const LOG_EVENT_GAME_OVER = "GAME_OVER";
 
-const enteredValue = prompt("Maximum life for you and the monster.", "100");
-let choseMaxLife = parseInt(enteredValue);
 let battleLog = [];
+let lastLoggedEntry;
 
-if (isNaN(choseMaxLife) || choseMaxLife <= 0) {
-  choseMaxLife = 100;
+function getMasxLifeValues() {
+  const enteredValue = prompt("Maximum life for you and the monster.", "100");
+  const parsedValue = parseInt(enteredValue);
+  if (isNaN(parsedValue) || choseMaxLife <= 0) {
+    throw { message: "Invalid user input, not a number!" };
+  }
+  return parsedValue;
 }
+
+let choseMaxLife;
+try {
+  choseMaxLife = getMasxLifeValues();
+} catch (error) {
+  console.log(error);
+  choseMaxLife = 100;
+  alert("You entered something wrong, deafault value of 100 was used.");
+  /* throw error; */
+} /* finally {
+
+}
+ */
 let currentMonsterHealth = choseMaxLife;
 let currentPlayerHealth = choseMaxLife;
 let hasBonusLife = true;
@@ -215,11 +232,18 @@ function printLogHandler() {
     console.log("--------");
   }
 
-  /*   let j = 3;
-  do {
-    console.log(j);
+  let j = 0;
+  outerWhile: do {
+    console.log("outer", j);
+    innerFor: for (let k = 0; k < 5; k++) {
+      if (k === 3) {
+        //break outerWhile;
+        continue outerWhile; //dangereous! => infinite loop!
+      }
+      console.log("inner", k);
+    }
     j++;
-  } while (j < 3); */
+  } while (j < 3);
 
   /* let j = 0;
   while (j < 3) {
@@ -235,11 +259,18 @@ function printLogHandler() {
   } */
   let i = 0;
   for (const logEntry of battleLog) {
-    console.log(`#${i}`);
-    for (const key in logEntry) {
-      console.log(key);
-      console.log(`${key} --> ${logEntry[key]}`);
+    if ((!lastLoggedEntry && lastLoggedEntry !== 0) || lastLoggedEntry < i) {
+      console.log(`#${i}`);
+      for (const key in logEntry) {
+        console.log(key);
+        console.log(`${key} --> ${logEntry[key]}`);
+      }
+      lastLoggedEntry = i;
+      break;
     }
+
+    i++;
+
     /* console.log(battleLog); */
   }
 }
