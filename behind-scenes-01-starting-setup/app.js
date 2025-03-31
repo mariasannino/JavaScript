@@ -1,3 +1,5 @@
+/* SECTION 5 112/117 */
+
 /* let name = "Maria";
 let hobbies;
 
@@ -25,7 +27,19 @@ greet(); */
 var userName =
   "Maria"; you will get an undifined variable but not an error. Wit let or const you will get an error. */
 
-"use strict";
+/* "use strict";
 const userName = "Maria";
 var undefined = 5;
 console.log(userName);
+ */
+
+/* SECTION 5 118 */
+function getName() {
+  return prompt("your Name", "");
+}
+function greet() {
+  const userName = getName();
+  console.log("hello " + userName);
+}
+
+greet();
