@@ -102,31 +102,62 @@ startGameBtn.addEventListener("click", () => {
 });
 
 /* NOT RELATED TO GAME */
-const sumUp = (resultHandler, ...numbers) => {
+const combine = (resultHandler, operation, ...numbers) => {
   /* ...numbers etting merged in an array inside the function. it has to be the last argument in the list and also one rest parameter per function */
   const validateNumber = (number) => {
     return isNaN(number) ? 0 : number;
   }; /* function inside a function */
   let sum = 0;
   for (const num of numbers) {
-    sum += validateNumber(num);
+    if (operation === "ADD") {
+      sum += validateNumber(num);
+    } else {
+      sum -= validateNumber(num);
+    }
   }
   resultHandler(sum);
 };
 
-const subtractUp = function () {
+/* const subtractUp = function (resultHandler, ...numbers) {
   let sum = 0;
-  for (const num of arguments) {
-    /*  arguments like using the rest operator but don't use it */
+  for (const num of numbers) {
+     arguments like using the rest operator but don't use it 
     sum -= num;
   }
-  return sum;
+  resultHandler(sum, "The reult after subtracting all numbers is");
+}; */
+
+const showResult = (messageText, result) => {
+  alert(messageText + " " + result);
 };
 
-const showResult = (result) => {
-  alert("The result after adding all numbers is: " + result);
-};
-
-sumUp(showResult, 1, 5, "ala", -3, 6, 10);
-sumUp(showResult, 2, 14, 16, 24, 4, 5 - 3, 6);
-console.log(subtractUp(1, 10, 15, 20));
+/* bind sets the first argument */
+combine(
+  showResult.bind(this, "The result after adding all numbers is: "),
+  "ADD",
+  1,
+  5,
+  "ala",
+  -3,
+  6,
+  10
+);
+combine(
+  showResult.bind(this, "The result after adding all numbers is: "),
+  "ADD",
+  2,
+  14,
+  16,
+  24,
+  4,
+  5 - 3,
+  6
+);
+combine(
+  showResult.bind(this, "The result after subtracting all numbers is: "),
+  "SUBSTRACT",
+  1,
+  10,
+  15,
+  20
+);
