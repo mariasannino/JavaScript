@@ -37,3 +37,15 @@ button.addEventListener("click", () => {
   /*   section.classList.toggle("visible"); */
   section.classList.toggle("invisible");
 });
+
+/* add remove object with:
+- appendChild()
+- insertAdjacentElement()
+- replaceChild()
+- removeChild()
+- append()
+- prepend()
+- before()
+- after()
+- replaceWith()
+- remove() */
