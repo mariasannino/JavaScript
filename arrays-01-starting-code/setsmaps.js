@@ -50,4 +50,4 @@ personData3.set(person, "Extra info!");
 
 person = null;
 
-console.log(personData);
+console.log(personData3);
