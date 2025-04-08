@@ -1,4 +1,6 @@
-import { ProjectList } from "./App/ProjectList";
+import { ProjectList } from "./App/ProjectList.js";
+
+globalThis.DEFAULT_VALUE = "MARIA";
 class App {
   static init() {
     const activeProjectsList = new ProjectList("active");
