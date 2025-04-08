@@ -4,13 +4,24 @@
   "description": "Java-Script the complete guide",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "build:dev": "webpack-dev-server",
+    "build:prod": "webpack --config webpack.config.prod.js"
   },
   "author": "Maria Sannino",
   "license": "ISC",
   "devDependencies": {
     "@eslint/js": "^9.24.0",
     "eslint": "^9.24.0",
-    "globals": "^16.0.0"
+    "globals": "^16.0.0",
+    "webpack-dev-server": "^5.2.1"
+  },
+  "dependencies": {
+    "clean-webpack-plugin": "^4.0.0",
+    "cross-env": "^7.0.3",
+    "lodash": "^4.17.21",
+    "webpack": "^5.99.2",
+    "webpack-cli": "^6.0.1"
   }
 }
