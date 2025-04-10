@@ -1,19 +1,19 @@
-const path = require('path');
-const CleanPlugin = require('clean-webpack-plugin');
+const path = require("path");
+const CleanPlugin = require("clean-webpack-plugin");
 
 module.exports = {
-  mode: 'development',
+  mode: "production",
   entry: {
-    shop: './src/non-optimized/shop.js'
+    shop: "./src/non-optimized/shop.js",
   },
   output: {
-    filename: '[name].js',
-    path: path.resolve(__dirname, 'dist', 'assets', 'scripts'),
-    publicPath: 'assets/scripts/'
+    filename: "[name].js",
+    path: path.resolve(__dirname, "dist", "assets", "scripts"),
+    publicPath: "assets/scripts/",
   },
-  devtool: 'cheap-module-eval-source-map',
+  devtool: "source-map",
   devServer: {
-    contentBase: './dist'
+    contentBase: "./dist",
   },
   module: {
     rules: [
@@ -21,18 +21,18 @@ module.exports = {
         test: /\.m?js$/,
         exclude: /(node_modules)/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
             presets: [
               [
-                '@babel/preset-env',
-                { useBuiltIns: 'usage', corejs: { version: 3 } }
-              ]
-            ]
-          }
-        }
-      }
-    ]
+                "@babel/preset-env",
+                { useBuiltIns: "usage", corejs: { version: 3 } },
+              ],
+            ],
+          },
+        },
+      },
+    ],
   },
-  plugins: [new CleanPlugin.CleanWebpackPlugin()]
+  plugins: [new CleanPlugin.CleanWebpackPlugin()],
 };
